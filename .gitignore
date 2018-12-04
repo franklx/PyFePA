@@ -1,0 +1,14 @@
+*~
+*.bak
+*.exe
+*.mo
+*.pck
+*.pid
+*.py[co]
+*.swp
+*.tmp
+
+_dist*
+nohup.out
+
+.venv
