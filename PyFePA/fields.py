@@ -17,7 +17,11 @@
 
 import datetime
 import importlib
-import dateutil.parser
+try:
+    from dateutil.parser import parse
+except:
+    def parse(dt):
+        assert False, "Date parsing requires dateutil module"
 from decimal import Decimal
 
 
@@ -186,9 +190,10 @@ class FieldDateTime(FieldType):
         try:
             if isinstance(value, datetime.datetime):
                 return value
-            elif dateutil.parser.parse(value):
-                return dateutil.parser.parse(value)
-        except Exception:
+            elif parse(value):
+                return parse(value)
+        #except Exception:
+        except KeyboardInterrupt:
             return super(FieldDateTime,self).validate(value)
 
     @classmethod

@@ -1,4 +1,5 @@
-# coding=utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import os
 
@@ -31,10 +32,11 @@ testdata = {'beneficiario': 'IT04578140875',
             'cognomemagistrato': 'Luciani',
             'tipointercettazione': 'C'}
 
-with open(DPATH+'/PyFePA/test/IT01234567890_11001.xml', 'rt') as f:
+with open(DPATH+'/test/IT01234567890_11001.xml', 'rt') as f:
     tree = ElementTree.parse(f)
     fe = serializer.deserialize(element=tree)
     print(serializer.serializer(fe,'xml'))
 
 testdata_list = [testdata,testdata,testdata]
 print(siamm.serialize(testdata_list))
+#  vim: set ts=8 sts=4 sw=4 et sta :

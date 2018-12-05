@@ -8,6 +8,8 @@
 *.swp
 *.tmp
 
+IT04200640870*.xml
+
 _dist*
 nohup.out
 

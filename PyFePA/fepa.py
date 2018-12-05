@@ -90,6 +90,11 @@ class GenFePA(object):
                 elif len(tagg) != 0:
                     raise ValueError()
 
+    def __init__(self, **kwargs):
+
+        for k, v in kwargs.items():
+            self.__setattr__(k, v)
+
 
 class FatturaElettronica(GenFePA):
 
