@@ -160,7 +160,7 @@ class FieldDecimal(FieldType):
 
     @classmethod
     def tostring(cls,value):
-        return unicode(Decimal(value).quantize(Decimal('.01')))
+        return Decimal(value).quantize(Decimal('.01'))
 
 
 class FieldDate(FieldType):

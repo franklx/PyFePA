@@ -19,7 +19,7 @@ ft.append_pay('MP05', 100.00, 'IT91M0311153480000000004042', dt_scad=date(2019,1
 #from PyFePA import fepa
 #w = fepa.DatiTrasporto(DataOraConsegna='2018-12-04T00')
 
-with open(ft.filename, 'w') as fo:
+with open(ft.filename, 'wb') as fo:
     fo.write( ft.xml )
 
 #  vim: set ts=8 sts=4 sw=4 et sta :

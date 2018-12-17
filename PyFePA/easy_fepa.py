@@ -116,13 +116,13 @@ class easy_fepa(object):
     def append_body(self, art_cod, art_dsc, qta, um, prz_unit, iva_alq, iva_natura=None, prz_tot=None):
         self.__nbr += 1
         if not prz_tot:
-            prz_tot = prz_unit * qta
+            prz_tot = (prz_unit or 0) * (qta or 0)
         _rw = fepa.DettaglioLinee(
                     NumeroLinea = self.__nbr,
                     Descrizione = art_dsc,
                     Quantita = qta,
                     UnitaMisura = um,
-                    PrezzoUnitario = prz_unit,
+                    PrezzoUnitario = prz_unit or 0,
                     AliquotaIVA = iva_alq,
                     PrezzoTotale = prz_tot,
                     Natura = iva_natura,
