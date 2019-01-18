@@ -136,7 +136,7 @@ class easy_fepa(object):
         else:
             self.__f.FatturaElettronicaBody[0].DatiBeniServizi.DettaglioLinee.append(_rw)
 
-    def append_foot(self, iva_alq, imponibile, imposta, iva_natura=None, iva_norma=None, arrot=0, iva_esig='I'):
+    def append_foot(self, iva_alq, imponibile, imposta, iva_natura=None, iva_norma=None, arrot=0, iva_esig=None):
         self.__nfr += 1
         _rw = fepa.DatiRiepilogo(
                     AliquotaIVA = iva_alq,
