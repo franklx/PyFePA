@@ -163,6 +163,39 @@ class FieldDecimal(FieldType):
         return Decimal(value).quantize(Decimal('.01'))
 
 
+class FieldHiDecimal(FieldType):
+
+    minlen = None
+    maxlen = None
+    type = 'S'
+
+    def validate(self, value):
+        try:
+            if super(FieldHiDecimal,self).validate(value):
+                return value
+            s = self.tostring(value)
+            if self.minlen <= len(str(s)) <= self.maxlen:
+                return s
+        except(ValueError, TypeError):
+            print('DEBUG- ', value)
+            return False
+
+    def __init__(self, **kwargs):
+
+        self.minlen = kwargs['minlen'] if 'minlen' in kwargs else None
+        self.maxlen = kwargs['maxlen'] if 'maxlen' in kwargs else None
+
+        super(FieldHiDecimal,self).__init__(**kwargs)
+
+    @classmethod
+    def tostring(cls,value):
+        v = Decimal(value).quantize(Decimal('.00000001')).normalize()
+        if (v * 100) - int(v * 100):
+            return v
+        else:
+            return v.quantize(Decimal('.01'))
+
+
 class FieldDate(FieldType):
 
     type = 'S'

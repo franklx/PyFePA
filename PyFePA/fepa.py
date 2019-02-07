@@ -422,13 +422,13 @@ class DettaglioLinee(GenFePA):
     TipoCessionePrestazione = FieldCostant(cvalue=TCP, code=2)
     CodiceArticolo = FieldObject(object_class='CodiceArticolo', code=3)
     Descrizione = FieldString(minlen=1, maxlen=1000, required=True, code=4)
-    Quantita = FieldDecimal(minlen=4, maxlen=21, code=5)
+    Quantita = FieldHiDecimal(minlen=4, maxlen=21, code=5)
     UnitaMisura = FieldString(minlen=1, maxlen=10, code=6)
     DataInizioPeriodo = FieldDate(code=7)
     DataFinePeriodo = FieldDate(code=8)
-    PrezzoUnitario = FieldDecimal(minlen=4, maxlen=21, required=True, code=9)
+    PrezzoUnitario = FieldHiDecimal(minlen=4, maxlen=21, required=True, code=9)
     ScontoMaggiorazione = FieldObject(object_class='ScontoMaggiorazione', multi=True, code=10)
-    PrezzoTotale = FieldDecimal(minlen=4, maxlen=21, required=True, code=11)
+    PrezzoTotale = FieldHiDecimal(minlen=4, maxlen=21, required=True, code=11)
     AliquotaIVA = FieldDecimal(minlen=4, maxlen=6, required=True, code=12)
     Ritenuta = FieldCostant(cvalue=['SI'], code=13)
     Natura = FieldCostant(cvalue=NT, code=14)
@@ -452,7 +452,7 @@ class AltriDatiGestionali(GenFePA):
 
     TipoDato = FieldString(minlen=1, maxlen=10, required=True, code=1)
     RiferimentoTesto = FieldString(minlen=1, maxlen=60, code=2)
-    RiferimentoNumero = FieldDecimal(minlen=4, maxlen=21, code=3)
+    RiferimentoNumero = FieldHiDecimal(minlen=4, maxlen=21, code=3)
     RiferimentoData = FieldDate(code=4)
 
 
