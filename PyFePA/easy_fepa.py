@@ -19,6 +19,7 @@ class easy_fepa(object):
         self.__nbr = 0
         self.__npr = 0
         self.__nfr = 0
+        self.__nar = 0
         self.__fname = '%s%s_%05i.xml' % (azi_naz, azi_piva, id_fattura)
 
         self.__f = fepa.FatturaElettronica(
@@ -86,7 +87,7 @@ class easy_fepa(object):
                 )
             ],
         )
-    
+
         if cli_piva:
             self.__f.FatturaElettronicaHeader.CessionarioCommittente.DatiAnagrafici.IdFiscaleIVA = fepa.IdFiscaleIVA(
                 IdPaese = cli_naz,
@@ -100,7 +101,6 @@ class easy_fepa(object):
                 BolloVirtuale = 'SI',
                 ImportoBollo = doc_bollo
             )
-
     @property
     def filename(self):
         return self.__fname
@@ -156,9 +156,9 @@ class easy_fepa(object):
     def append_pay(self, pag_cod, importo, iban=None, dt_scad=None, abi=None, cab=None, dsc_banca=None, bic=None, is_anti=None):
         self.__npr += 1
         if self.__npr > 1:
-            CondizioniPagamento = is_anti and 'TP01'
+            self.__f.FatturaElettronicaBody[0].DatiPagamento.CondizioniPagamento = is_anti and 'TP01'
         else:
-            CondizioniPagamento = is_anti and 'TP03' or 'TP02'
+            self.__f.FatturaElettronicaBody[0].DatiPagamento.CondizioniPagamento = is_anti and 'TP03' or 'TP02'
 
         _rw =  fepa.DettaglioPagamento(
                         ModalitaPagamento = pag_cod, # MP01..12
@@ -175,5 +175,20 @@ class easy_fepa(object):
             self.__f.FatturaElettronicaBody[0].DatiPagamento.DettaglioPagamento = [_rw]
         else:
             self.__f.FatturaElettronicaBody[0].DatiPagamento.DettaglioPagamento.append(_rw)
+
+    def append_attach(self, nome, attachment, algoritmo=None, formato=None, descrizione=None):
+        self.__nar += 1
+        _rw =  fepa.Allegati(
+                        NomeAttachment = nome,
+                        AlgoritmoCompressione = algoritmo,
+                        FormatoAttachment = formato,
+                        DescrizioneAttachment = descrizione,
+                        Attachment = attachment,
+                    )
+
+        if self.__nar == 1:
+            self.__f.FatturaElettronicaBody[0].Allegati = [_rw]
+        else:
+            self.__f.FatturaElettronicaBody[0].Allegati.append(_rw)
 
 #  vim: set ts=8 sts=4 sw=4 et sta :
