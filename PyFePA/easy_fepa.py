@@ -14,7 +14,9 @@ class easy_fepa(object):
 
                         doc_bollo = None,
                         is_nc = False,
-                        is_pa = False):
+                        is_pa = False,
+
+                        rif_amm = None):
 
         self.__nbr = 0
         self.__npr = 0
@@ -46,6 +48,7 @@ class easy_fepa(object):
                         ),
                         RegimeFiscale = 'RF01',
                         CodiceFiscale = azi_piva,
+                        RiferimentoAmministrazione = rif_amm,
                     ),
                     Sede = fepa.Sede(
                         Indirizzo = azi_indirizzo,
