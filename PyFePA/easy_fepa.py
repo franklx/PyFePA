@@ -48,7 +48,6 @@ class easy_fepa(object):
                         ),
                         RegimeFiscale = 'RF01',
                         CodiceFiscale = azi_piva,
-                        RiferimentoAmministrazione = rif_amm,
                     ),
                     Sede = fepa.Sede(
                         Indirizzo = azi_indirizzo,
@@ -57,6 +56,7 @@ class easy_fepa(object):
                         Provincia = azi_prov,
                         Nazione = azi_naz,
                     ),
+                    RiferimentoAmministrazione = rif_amm,
                 ),
                 CessionarioCommittente = fepa.CessionarioCommittente(
                     DatiAnagrafici = fepa.DatiAnagraficiCC(
