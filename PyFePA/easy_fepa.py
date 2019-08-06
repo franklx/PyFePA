@@ -19,6 +19,7 @@ class easy_fepa(object):
                         rif_amm = None):
 
         self.__nbr = 0
+        self.__nor = 0
         self.__npr = 0
         self.__nfr = 0
         self.__nar = 0
@@ -138,6 +139,26 @@ class easy_fepa(object):
             self.__f.FatturaElettronicaBody[0].DatiBeniServizi.DettaglioLinee = [_rw]
         else:
             self.__f.FatturaElettronicaBody[0].DatiBeniServizi.DettaglioLinee.append(_rw)
+
+    @property
+    def body_row(self):
+        return self.__nbr
+
+    def append_ordine(self, rif_num_linea, id_documento, data=None, num_item=None, cod_commessa=None, cod_cup=None, cod_cig=None):
+        self.__nor += 1
+        _rw = fepa.DatiOrdineAcquisto(
+                    RiferimentoNumeroLinea = rif_num_linea,
+                    IdDocumento = id_documento,
+                    Data = data,
+                    NumItem = num_item,
+                    CodiceCommessaConvenzione = cod_commessa,
+                    CodiceCUP = cod_cup,
+                    CodiceCIG = cod_cig,
+                )
+        if self.__nor == 1:
+            self.__f.FatturaElettronicaBody[0].DatiGenerali.DatiOrdineAcquisto = [_rw]
+        else:
+            self.__f.FatturaElettronicaBody[0].DatiGenerali.DatiOrdineAcquisto.append(_rw)
 
     def append_foot(self, iva_alq, imponibile, imposta, iva_natura=None, iva_norma=None, arrot=0, iva_esig=None):
         self.__nfr += 1
