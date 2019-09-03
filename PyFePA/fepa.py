@@ -304,7 +304,7 @@ class DatiCassaPrevidenziale(GenFePA):
 
 class DatiOrdineAcquisto(GenFePA):
 
-    RiferimentoNumeroLinea = FieldInteger(minlen=1, maxlen=4, code=1)
+    RiferimentoNumeroLinea = FieldInteger(minlen=1, maxlen=4, code=1, multi=True)
     IdDocumento = FieldString(minlen=1, maxlen=20, required=True, code=2)
     Data = FieldDate(code=3)
     NumItem = FieldString(minlen=1, maxlen=20, code=4)
