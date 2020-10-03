@@ -287,7 +287,7 @@ class DatiRitenuta(GenFePA):
 class DatiBollo(GenFePA):
 
     BolloVirtuale = FieldCostant(cvalue='SI', required=True, code=1)
-    ImportoBollo = FieldDecimal(minlen=4, required=True, maxlen=15, code=2)
+    ImportoBollo = FieldDecimal(minlen=4, required=False, maxlen=15, code=2)
 
 
 class DatiCassaPrevidenziale(GenFePA):
