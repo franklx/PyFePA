@@ -13,6 +13,7 @@ class easy_fepa(object):
                         doc_data, doc_numero, doc_totale,
 
                         doc_bollo = None,
+                        val_bollo = None,
                         is_nc = False,
                         is_pa = False,
 
@@ -103,7 +104,7 @@ class easy_fepa(object):
         if doc_bollo:
             self.__f.FatturaElettronicaBody[0].DatiGenerali.DatiGeneraliDocumento.DatiBollo = fepa.DatiBollo(
                 BolloVirtuale = 'SI',
-                ImportoBollo = doc_bollo
+                ImportoBollo = val_bollo
             )
     @property
     def filename(self):
