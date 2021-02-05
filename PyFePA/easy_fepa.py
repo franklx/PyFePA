@@ -98,7 +98,8 @@ class easy_fepa(object):
                 IdPaese = cli_naz,
                 IdCodice = cli_piva,
             )
-        else:
+
+        if cli_cfis:
             self.__f.FatturaElettronicaHeader.CessionarioCommittente.DatiAnagrafici.CodiceFiscale = cli_cfis
 
         if doc_bollo:
