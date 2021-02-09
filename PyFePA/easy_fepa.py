@@ -119,7 +119,7 @@ class easy_fepa(object):
     def xml(self):
         return serializer.serializer(self.__f, 'xml')
 
-    def append_body(self, art_cod, art_dsc, qta, um, prz_unit, iva_alq, iva_natura=None, prz_tot=None):
+    def append_body(self, art_cod, art_dsc, qta, um, prz_unit, iva_alq, iva_natura=None, prz_tot=None, rif_amm=None, tipo_cod_ex=None):
         self.__nbr += 1
         if not prz_tot:
             prz_tot = (prz_unit or 0) * (qta or 0)
@@ -132,10 +132,17 @@ class easy_fepa(object):
                     AliquotaIVA = iva_alq,
                     PrezzoTotale = prz_tot,
                     Natura = iva_natura,
+                    RiferimentoAmministrazione = rif_amm,
                     #ScontoMaggiorazione
                 )
-        if art_cod:
-            _rw.CodiceArticolo = fepa.CodiceArticolo(CodiceTipo='', CodiceValore = art_cod)
+        if art_cod or tipo_cod_ex:
+            _cods = []
+            if art_cod:
+                _cods.append( fepa.CodiceArticolo(CodiceTipo = 'FOR', CodiceValore = art_cod) )
+            if tipo_cod_ex:
+                for _tp, _cod in tipo_cod_ex:
+                    _cods.append( fepa.CodiceArticolo(CodiceTipo = _tp, CodiceValore = _cod) )
+            _rw.CodiceArticolo = _cods
 
         if self.__nbr == 1:
             self.__f.FatturaElettronicaBody[0].DatiBeniServizi.DettaglioLinee = [_rw]

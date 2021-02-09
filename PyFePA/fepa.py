@@ -420,7 +420,7 @@ class DettaglioLinee(GenFePA):
 
     NumeroLinea = FieldInteger(minlen=1, maxlen=4, required=True, code=1)
     TipoCessionePrestazione = FieldCostant(cvalue=TCP, code=2)
-    CodiceArticolo = FieldObject(object_class='CodiceArticolo', code=3)
+    CodiceArticolo = FieldObject(object_class='CodiceArticolo', multi=True, code=3)
     Descrizione = FieldString(minlen=1, maxlen=1000, required=True, code=4)
     Quantita = FieldHiDecimal(minlen=4, maxlen=21, code=5)
     UnitaMisura = FieldString(minlen=1, maxlen=10, code=6)
